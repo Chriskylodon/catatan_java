@@ -1,0 +1,10 @@
+https://medium.com/programmer-zaman-now/setting-java-path-di-windows-4da2c65d8298
+
+1. download JRE dan JDK di openjdk.java.net atau oracle jdk
+2. ekstrak
+3. pindahkan folder java jdk ..version.. ke C:\Program Files\Java
+4. edit the environment variable - environment variable
+5. tambahkan (klik new) di kolom variable name isi JAVA_HOME dan di variable value isi C:\Program Files\Java\jdk-16.0.1
+6. klik paths, lalu klik edit, klik new, isi dengan %JAVA_HOME%\bin
+7. test di cmd java -version atau javac -version
+8. download & install intellij idea

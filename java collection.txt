@@ -1,0 +1,274 @@
+
+array (iterable(index) dan map(kunci))
+
+semua collection tipe data generic
+
+semua collection ada interface
+semua interface sudah ada implementasinya
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+iterable
+
+iterator -> ada method namanya iterator() (dengan interface)
+
+List, Set, Queue, 
+
+
+
+List
+
+		ITERABLE
+		COLLECTION
+		LIST
+ARRAYLIST	LINKEDLIST
+
+ARRAYLIST : index, menghandle awal bikin 10 array otomatis (dengan index), begitu sudah penuh tambah 10 lagi, dst (grow)
+LINKEDLIST : (prev, node, next) hanya menambah node di akhir(bukan index)
+
+
+relative
+add     		cepat tapi			cepat
+get	/ read		cepat				lambat
+set				cepat				lambat
+remove 			lambat (stack)		cepat
+
+
+mutable -> bisa dirubah
+immutable -> ga bisa diubah
+
+misal, ada list berupa hobi-hobi:
+length, isi list/nama hobi  				tidak bisa diubah
+field dari hobi 							tetap bisa diubah
+
+contoh:
+list hobi
+field dari tiap hobi ialah name, dsb.
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+Set Interface
+
+			ITERABLE
+			COLLECTION
+			SET
+ENUMSET		HASHSET			LINKEDHASHSET
+			LINKEDHASHSET
+
+enumset -> khusus untuk enum, unik (jarang dipake)
+hashset -> hashCode() pastikan ada implementasinya -> data disimpan ke dalam hash table dengan mengkalkulasikan hashCode() funtion
+
+hashset -> ketika tidak terurut
+linkedHashSet -> ketika data harus terurut
+
+
+
+sortedset
+
+ITERABLE
+COLLECTION
+SET
+SORTEDSET 
+NAVIGABLESET
+TREESET
+
+jika element turunan Comparable, maka otomatis diurutkan dari Comparable tsb
+jika element bukan turunan Comparable, maka kita bisa mengurutkan menggunakan Comparator untuk memberitahu SortedSet bagaimana mengurutkan element-element nya
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+Queue Interface (Antrian)
+
+
+						ITERABLE
+						COLLECTION
+						QUEUE
+          DEQUEUE		         	PRIORITYQUEUE
+LINKEDLIST 		ARRAYDEQUEUE
+
+
+
+Array Dequeue -> menggunakan array sebagai implementasi queue nya
+LinkedList -> menggunakan double linkedlist sebagai implementasi queue nya
+Priority Queue -> menggunakan array sebagai implementasi queue nya, namun diurutkan menggunakan Comparable dan Comparator
+
+
+
+Dequeue Interface
+
+double ended queue -> bisa beroperasi dari depan ataupun belakang, BISA FIFO BISA LIFO (beda sama queue biasa yg hanya bisa dari depan doang FIFO doang)
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+MAP
+
+
+								MAP
+HASHMAP		WEAKHASHMAP		IDENTIFYHASHMAP		LINKEDHASHMAP		ENUMHASHMAP
+
+
+hashMap -> implementasi "Map" yg melakukan distribusi "key" menggunakan "hashCode()" function
+		-> hashcode() function seunik mungkin, kalo bisa jangan ada yg sama, 
+		-> pengecekan duplikasi melalui method equals()
+
+weakHashMap -> implementasi "map" yg mirip dengan "hashMap"
+			-> yg membedakan ialah "weakHashMap" menggunakan "weak key", kalo udah ga dipake, weak key tsb dihapus
+			-> jika terjadi garbage collection di java, dimungkinkan WeakHashMap akan dihapus
+			-> WeakHashMap cocok untuk data sementara
+			-> WeakHashMap cocok untuk menyimpan cache
+
+garbage collection (gc) -> menghapus data sementara 
+
+IdentityHashMap -> implementasi "map" yg mirip dengan "hashMap"
+				-> pembedaannya melalui method == (reference equality)
+				-> jadi key nya dianggap sama jika berada di lokasi memori yg sama
+
+LinkedHashMap -> implementasi "map" dengan menggunakan double linked list
+			  -> gunakan linkedHashMap jika lebih butuh iterasi dibanding get data dari key
+
+
+EnumMap -> implementasi "map" dengan menggunakan "enum"
+		-> karena data "enum" suda pasti unik
+		-> algoritma pendistribusian key dioptimalkan untuk enum
+		-> sehingga lebih optimal dibandingkan menggunakan hashCode() method
+
+
+
+
+
+
+ImmutableMap
+
+SortedMap
+
+MAP
+SORTEDMAP
+TREEMAP
+
+NavigableMap
+
+MAP
+SORTEDMAP
+NAIGABLEMAP
+TREEMAP
+
+otomatis mengurutkan 
+
+
+
+
+
+
+
+Entry Map
+
+Set -> entrySet()
+
+
+
+
+
+
+Legacy Collection (dari java bersi 1)
+
+vektor class 
+
+vektor class -> merupakan implementasi dari interface "list"
+			 -> cara kerjanya hampir sama dengan arraylist (jadi mungkin gaada bedanya)
+			 -> method yg ada di vektor menggunakan kata kunci synchronized (thread safe) -> makanya arraylist lebih cepat tapi kurang aman
+			 -> thread safe -> ketika ada 2 perintah yg mengakses, aman/ga bingung
+			 				-> ketika ada 2 yg men set vektor tsb, vektor di set 1 1
+			 				-> aman dari rest condition
+			 -> sudah ada penggantinya, java multi threading
+
+HashTable class
+
+hashtable -> implementasi dari "map" mirip dengan "hashMap"
+		  -> sama seperti vektor, semua method ada kata kunci synchronized
+		  -> sudah ada penggantinya concurrentHashMap(), jadi jarang
+
+
+Stack class
+
+stack -> implementasi dari struktur data tumpukan (LIFO)
+	  
+
+Sort
+
+Hanya mengurutkan List
+kalau sisanya set, queue, dequeue, map cara kerjanya udah beda
+
+Binary Search
+
+jika sudah berurut
+sudah ada implementasi binary search, 
+
+logika binary search:
+misal mau nyari 7 di 71 data.
+dari nilai tengah 0-71 yaitu 36, ternyata 7 < 35, maka cari lagi
+dari nilai tengah 0-35 yaitu 18, ternyata 7 < 18, maka cari lagi
+dari nilai tengah 0-18 yaitu 9, ternyata 7 < 9, maka cari lagi
+dari nilai tengah 0-9 yaitu 5, ternyata 7 > 5, maka cari lagi
+dari nilai tengah 5-10 yaitu 8, ternyata 7 < 8, maka cari lagi
+dari nilai tengah 5-8 yaitu 7, ketemu 7
+
+
+collections class
+
+abstract class
+
+jangan implemen interfacenya
+tapi implemen abstract class nya
+
+AbstractCollection
+AbstractList
+AbstractMap
+AbstractQueue
+AbstractSet
+
+
+
+Default Method
+
+java 8 ada fitur bernama Default Method , 
+dimana kita bisa menambahkan konkrit method di interface 
+
+fitur ini banyak digunakan di java Collection,
+karena kita tahu bahwa semua collection di java memiliki kontrak interface.
+
+sehingga dengan mudah di java bisa meng improve kemampuan                 
+semua collection  hanya dengan menambahkan default method di interface collectionnya
+
+
+
+Deafult Method di Collection
+
+Iterable.forEach(consumer)		-> melakukan iterasi seluruh data collection
+List.removeIf(predicate)		-> menghapus data di collection menggunakan predicate
+List.replaceAll(operator)  		-> mengubah seluruh data di collection
+
+
+
+Default Method di Map
+
+Spliterator
+
+konversi ke array
+
+Object[] to Array()		-> mengubah collection menjadi array
+T[] to Array(T[])		-> mengubah collection menjadi array T

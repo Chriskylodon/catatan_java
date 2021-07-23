@@ -1,0 +1,131 @@
+
+generic (general) tipe data
+
+generic adalah          kemampuan                menambahkan parameter type                    saat membuat class atau method
+
+biasanya, itu type data(parameter type) sudah didefinisikan
+			atau kalau mau ditambahkan menggunakan method overloading 
+
+generic parameter type yg biasa digunakan:
+E - Element (biasanya digunakan di collection atau di struktur data)
+K - Key
+N - Number
+T - Type
+V - Value
+S,U,V, dst - 2nd, 3rd, 4th types
+
+
+package programmer.zaman.now.generic;
+
+public class MyData<T> {
+
+    private T data;
+
+    public MyData(T data){
+        this.data = data;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data){
+        this.data = data;
+    }
+}
+
+
+
+package programmer.zaman.now.generic;
+
+public class MyData {
+
+    private Object data;
+
+    public MyData(Object data){
+        this.data = data;
+    }
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data){
+        this.data = data;
+    }
+}
+
+
+
+--------------------
+
+MyData<T>
+MyData<? extends Object>
+MyData<? super String>
+MyData<T extends Number>
+MyData<T extends class & interface & interface & dst>
+
+-------------------
+
+
+
+
+
+sifat:
+invariant			-> Error polymorphism - inheritance dalam generic (konsistensi tipe data)
+covariant 			-> jangan setData, karena susah waktu getData nya (extends Object)
+contravariant		-> jangan getData, karena bingung waktu setData nya (suoer String)
+
+
+---------------------------------------
+
+setData -> langsung setData ke object
+
+getData -> langsung getData dari object
+
+
+
+
+setData -> dari variabel lama ke variabel baru
+
+getData -> dari variabel lama ke variabel baru
+
+---------------------------------------
+
+
+
+
+
+
+			Object
+
+	String			Number
+
+				Long	Integer		Short	Double
+
+
+invariant, covariant, contravariant
+constraint - Bound 
+info generic - Type Erasure
+	bahaya kalau ga dikasih info generic/ketika kerja di 
+
+
+
+comparable
+
+implements Comparable<Person>
+salah satu guna comparable ialah untuk mengurutkan
+isinya cuma compareTo dan 1 object doang
+
+
+comparator
+
+
+
+
+
+
+
+
+
+

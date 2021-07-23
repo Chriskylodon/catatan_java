@@ -1,0 +1,20 @@
+object class -> ctrl + klik kata "Object"
+
+	hashcode
+	equals
+	tostring
+
+number class -> 
+	
+	intvalue
+	longvalue
+	shortvalue
+	parse
+	tryparse
+
+
+string class -> 
+	length
+	concat
+	charAt
+	manipulasi string kebanyakan

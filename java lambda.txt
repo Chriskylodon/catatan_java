@@ -1,0 +1,658 @@
+Lambda calculus 
+
+yg mengacu pada anonymous function (function tanpa nama)
+tapi di java tidak ada anonymous function, adanya anonymous class
+
+dan di java, lambda tidak bisa berdiri sendiri
+jadi, mungkin di bahasa pemrograman lain berbeda
+
+maka dari itu, di java adanya representasi dari anonymous class
+beda sama javascript, ada anonymous function
+
+fungsi: mengembalikan data
+
+
+
+anonymous class
+
+syarat lambda:
+- berupa interface
+- memiliki 1 method abstract (hanya boleh 1)
+- ditambahkan @FunctionalInterface di interfacenya
+- minimal menggunakan java 8
+
+
+Poin penting untuk memahami ekspresi lambda:
+
+Item di sebelah kiri panah (->) adalah parameter lambda. Dalam hal ini, parameter input didefinisikan sebagai Parameter param.
+Di sebelah kanan panah (->) adalah tubuh lambda.
+Tubuh adalah tempat di mana pemrosesan lambda yang sebenarnya terjadi, mis., Menentukan logikanya. Biasanya, ekspresi java lambda memiliki logika sederhana.
+
+
+
+jadi, lambda ini merupakan implementasi dari interface.
+jadi lambda ini merupakan hampir sama dengan method.
+
+dengan pendefinisian object + parameter method + -> + badan method
+contoh: Consumer<String> consumer1 = value -> System.out.println(value);
+
+
+
+
+package programmer.zaman.now.lambda;
+
+@FunctionalInterface
+public interface SimpleAction {
+
+    String action();
+
+}
+
+
+
+package programmer.zaman.now.lambda.app;
+
+import programmer.zaman.now.lambda.SimpleAction;
+
+public class SimpleActionApp {
+    public static void main(String[] args) {
+
+        SimpleAction simpleAction = new SimpleAction() {
+            @Override
+            public String action() {
+                return "Eki";
+            }
+        };
+
+        System.out.println(simpleAction.action());
+
+
+
+
+        SimpleAction simpleAction1 = () -> {
+            return "Ekiiii";
+        };
+
+        System.out.println(simpleAction1.action());
+
+    }
+
+
+}
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+Membuat lambda
+
+
+
+
+package programmer.zaman.now.lambda;
+
+@FunctionalInterface
+public interface SimpleAction {
+
+    String action(String name);
+
+}
+
+
+
+
+
+package programmer.zaman.now.lambda.app;
+
+import programmer.zaman.now.lambda.SimpleAction;
+
+public class SimpleActionApp {
+    public static void main(String[] args) {
+
+        SimpleAction simpleAction = new SimpleAction() {
+            @Override
+            public String action(String name) {
+                return "Eki";
+            }
+        };
+
+        System.out.println(simpleAction.action("Eki"));
+
+
+
+
+        SimpleAction simpleAction1 = (String name) -> {
+            return "Ekiiii";
+        };
+
+        System.out.println(simpleAction1.action("Ekii"));
+
+    }
+
+
+}
+
+
+
+
+
+
+package programmer.zaman.now.lambda.app;
+
+import programmer.zaman.now.lambda.SimpleAction;
+
+public class SimpleActionApp {
+    public static void main(String[] args) {
+
+        SimpleAction simpleAction = (String value) -> {
+            return "Hello" + value;
+        };
+
+        SimpleAction simpleAction1 = (name) -> {
+            return "Hello" + name;
+        };
+
+        SimpleAction simpleAction2 = (String value) -> "Hello" + value;
+
+        SimpleAction simpleAction3 = (name) -> "Hello " + name;
+
+        SimpleAction simpleAction4 = name -> "Hello " + name;
+
+
+
+    }
+
+
+}
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Java Util Function 
+
+for each
+
+
+interface consumer (void)
+
+@FunctionalInterface
+public interface Consumer<T> {
+	void apply(T t);
+}
+
+
+package programmer.zaman.now.lambda.app;
+
+import java.util.function.Consumer;
+import java.util.function.Function;
+
+public class ConsumerApp {
+    public static void main(String[] args) {
+
+        Consumer<String> consumer = new Consumer<String>() {
+            @Override
+            public void accept(String value) {
+                System.out.println(value);
+            }
+        };
+
+        consumer.accept("Eki Ekiii");
+
+    }
+}
+
+
+
+
+
+
+interface function 
+
+@FunctionalInterface
+public interface function<T, R> {
+	R apply(T t);
+}
+
+
+
+package programmer.zaman.now.lambda.app;
+
+import java.util.function.Consumer;
+import java.util.function.Function;
+
+public class FunctionApp {
+    public static void main(String[] args) {
+
+        Function<String, Integer> functionLength = value -> value.length();
+
+        functionLength.apply("Eki");
+
+        System.out.println(functionLength.apply("Eki"));
+    }
+}
+
+
+
+
+
+
+Interface Predicate (boolean)
+
+@FunctionalInterface
+public interface Predicate<T> {
+	boolean test(T t);
+}
+
+
+
+package programmer.zaman.now.lambda.app;
+
+import java.util.function.Predicate;
+
+public class PredicateApp {
+    public static void main(String[] args) {
+
+        Predicate<String> predicate = value -> value.isBlank();
+
+        boolean blank = predicate.test("Eki");
+        boolean blank1 = predicate.test("");
+
+        System.out.println(blank);
+        System.out.println(blank1);
+
+    }
+}
+
+
+
+
+
+
+
+interface supplier (get)
+
+public interface Supplier<T> {
+	T get();
+}
+
+
+
+
+package programmer.zaman.now.lambda.app;
+
+import java.util.function.Supplier;
+
+public class SupplierApp {
+    public static void main(String[] args) {
+
+        Supplier<String> supplier = () -> "Eki Ekiii Ekiiiiii";
+
+        System.out.println(supplier.get());
+
+    }
+}
+
+
+
+dan masih banyak lagi, banyak banget
+
+biasakan jangan langsung membuat lambda,
+tapi dicari dulu apakah ada function yg akan digunakan
+ctrl + klik nama interface
+ctrl + klik function
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Method Reference
+
+
+
+Method reference static
+
+package programmer.zaman.now.lambda.util;
+
+public class StringUtil {
+
+    public static boolean isLowerCase(String value){
+        for(var c : value.toCharArray()){
+            if (!Character.isLowerCase(c)){
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+
+
+
+package programmer.zaman.now.lambda.app;
+
+import programmer.zaman.now.lambda.util.StringUtil;
+
+import java.util.function.Predicate;
+
+public class MethodReferenceApp {
+    public static void main(String[] args) {
+
+//        Predicate<String> predicateIsLowerCase = new Predicate<String>() {
+//            @Override
+//            public boolean test(String value) {
+//                return StringUtil.isLowerCase(value);
+//            }
+//        };
+//
+//        Predicate<String> predicateIsLowerCase = value -> StringUtil.isLowerCase(value);
+
+        Predicate<String> predicateIsLowerCase = StringUtil::isLowerCase;
+
+        System.out.println(predicateIsLowerCase.test("eki"));
+        System.out.println(predicateIsLowerCase.test("Eki"));
+
+
+    }
+}
+
+
+
+
+
+
+Method reference non-static
+
+package programmer.zaman.now.lambda.app;
+
+import programmer.zaman.now.lambda.util.StringUtil;
+
+import java.util.function.Predicate;
+
+public class MethodReferenceApp {
+    public static void main(String[] args) {
+
+//        Predicate<String> predicateIsLowerCase = new Predicate<String>() {
+//            @Override
+//            public boolean test(String value) {
+//                return StringUtil.isLowerCase(value);
+//            }
+//        };
+//
+//        Predicate<String> predicateIsLowerCase = value -> StringUtil.isLowerCase(value);
+
+        Predicate<String> predicateIsLowerCase = StringUtil::isLowerCase;
+
+        System.out.println(predicateIsLowerCase.test("eki"));
+        System.out.println(predicateIsLowerCase.test("Eki"));
+
+    }
+
+    public void run(){
+//        Predicate<String> predicateIsLowerCase = new Predicate<String>() {
+//            @Override
+//            public boolean test(String s) {
+//                return MethodReferenceApp.this.isLowerCase(s);
+//            }
+//        };
+
+//        Predicate<String> predicateIsLowerCase = value -> this.isLowerCase(value);
+//        Predicate<String> predicateIsLowerCase = MethodReferenceApp::isLowerCase;
+//        Predicate<String> predicateIsLowerCase = value -> MethodReferenceApp.isLowerCase(value);
+
+        Predicate<String> predicateIsLowerCase = value -> MethodReferenceApp.this.isLowerCase(value);
+//        Predicate<String> predicateIsLowerCase = MethodReferenceApp.this::isLowerCase;
+//        Predicate<String> predicateIsLowerCase = this::isLowerCase;
+
+
+        System.out.println(predicateIsLowerCase.test("eki"));
+        System.out.println(predicateIsLowerCase.test("Eki"));
+    }
+
+
+
+
+
+
+
+    public static boolean isLowerCase(String value){
+        for(var c : value.toCharArray()){
+            if (!Character.isLowerCase(c)){
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+
+
+
+
+Method Reference Object
+
+::
+
+namaObject::namaMethod
+StringApp::isLowerCase
+
+Predicate<String> predicate = value -> stringApp.isLowerCase(value);
+Predicate<String> predicate = stringApp::isLowerCase
+
+
+
+
+
+Method reference parameter
+
+::
+
+String::namaMethod
+
+Function<String, String> functionUpper = (String value) -> toUpperCase();	
+Function<String, String> functionUpper = String::toUpperCase;	
+
+tidak boleh punya parameter
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lambda di collection
+
+List<String> names = List.of("aba", "bab", "aca") 
+names.foreach(name -> System.out.println(name))
+names.foreach(System.out::println)
+
+
+
+
+iterable.foreach
+
+
+//Lambda
+Consumer<String> lambda = value -> System.out.println(value);
+list.foreach(lambda);
+
+list.foreach(value -> System.out.println(value))
+
+
+
+//Lambda Method Reference
+list.foreach(System.out::println)
+
+
+
+
+
+Collection.removeIf
+
+names.removeIf(name -> name.length() > 5);
+
+
+
+
+Map.foreach
+
+map.foreach((key, value) -> System.out.println(key + " : " + value))
+
+
+
+
+buka documentationnya, itu banyak banget yg menggunakan lambda expression
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lambda sebagai lazy parameter
+
+lazy maksudnya : hanya akan eksekusi ketika parameternya diakses
+				 jadi, ketika parameternya tidak diakses, tidak akan dieksekusi
+
+---------------------------------
+testScore(60, () -> getName()); |
+---------------------------------
+
+in:
+
+package programmer.zaman.now.lambda.app;
+
+import java.util.function.Supplier;
+
+public class LazyApp {
+  public static void main(String[] args) {
+    testScore(60, () -> getName());
+  }
+
+  public static void testScore(int score, Supplier<String> name) {
+    if (score > 80) {
+      System.out.println("Selamat " + name.get() + ", Anda Lulus");
+    } else {
+      System.out.println("Coba Lagi Tahun Depan");
+    }
+  }
+
+  public static String getName(){
+    System.out.println("Method getName() dipanggil");
+    return "Eko";
+  }
+}
+
+
+out:
+Method getname() dipanggil
+Coba lagi tahun depan
+
+
+
+
+in:
+testScore(90, "Eki")
+
+out:
+Selamat Eki anda lulus
+
+
+
+
+in:
+testScore(60, getName());
+
+out:
+Method getname() dipanggil
+Coba lagi tahun depan
+
+
+
+dipanggil dulu, baru dikirim ke parameternya	
+
+
+
+
+
+
+
+in: 
+testScore(60, () -> getName())
+
+out:
+Method getname() dipanggil
+Coba lagi tahun depan
+
+
+in:
+testScore(60, () -> getName())
+
+out: 
+Selamat Eko anda lulus
+
+
+() itu name
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lambda di optional
+
+class ini digunakan sebagai wrapper untuk value yg bisa null
+Optional ---> lebih mudah beroperasi ketika object bisa null, 
+karena NullPointerException salah satu hal yg sering kali ditemui oleh programmer
+
+package programmer.zaman.now.lambda.app;
+
+import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.function.Function;
+
+public class OptionalApp {
+  public static void main(String[] args) {
+
+    sayHello("Eko");
+
+    String name = null;
+
+    sayHello(name);
+
+  }
+
+  public static void sayHello(String name) {
+//    Optional.ofNullable(name)
+//        .map(String::toUpperCase)
+//        .ifPresentOrElse(
+//            value -> System.out.println("HELLO " + value),
+//            () -> System.out.println("HELLO")
+//        );
+
+    String upperName = Optional.ofNullable(name)
+        .map(String::toUpperCase)
+        .orElse("TEMAN");
+
+    System.out.println("HELLO " + upperName);
+
+//    Optional<String> optionalName = Optional.ofNullable(name);
+//    Optional<String> optionalNameUpper = optionalName.map(value -> value.toUpperCase());
+//    optionalNameUpper.ifPresent(value -> System.out.println("HELLO " + value));
+
+//    if check null
+//    if(name != null){
+//      String upperName = name.toUpperCase();
+//      System.out.println("HELLO " + upperName);
+//    }
+
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

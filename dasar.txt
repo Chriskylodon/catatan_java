@@ -1,0 +1,55 @@
+psvm -> enter
+
+window casting 		short -> byte
+narrowing casting 	byte -> short
+
+String (s nya gede)
+
+tipe data primitif 	deafult		tipe data bukan primitif	default
+int			0		Integer				null
+boolean					Boolean				
+char					Char
+
+
+
+expression
+     |
+|--------|
+int value; -> statement
+
+
+expression
+     |
+|--------|
+value = 10; -> statement
+
+
+
+
+		   expression
+ 		        |
+		   |---------|
+System.out.println(value = 100); -> statement
+
+
+
+// assignment statement
+double aValue = 2345.123;
+
+// increment statement
+aValue++;
+
+// method invocation statement
+System.out.println("Hello World!");
+
+// object creation statement
+Date date = new Date();
+
+
+break - menghentikan seluruh perulangan
+continue - menghentikan perulangan, lalu melanjutkan perulangan berikutnya
+
+
+metode
+1. dari kalimat bahasa manusia lalu 
+2. dari dasar kodingan

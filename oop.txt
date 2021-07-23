@@ -1,0 +1,398 @@
+object turunannya ada String, Integer, Double, dsb
+
+object -> new object(), int, string, boolean, 
+method -> function
+class -> blueprint
+
+package -> 
+import ->
+import java.lang
+import java.lang.String
+
+spesialisasi -> u/ tiap types
+fungsi utama -> class and object
+
+cara ngeliat developer -> tiap ngeliat codingan, ngeliat yg di memorinya
+
+
+
+
+
+
+
+this	-> menunjuk ke arah field/properties/attribut super class
+Super 	-> menunjuk ke arah method atau pun class super
+
+psvm
+sout -> shortcut
+
+nama_object.nama_method(parameter)
+VicePresident vp = (VicePresident) employee;		-> buat ngerubah tipe data nya
+if(employee instanceof VicePresident){}
+file -> project structure -> modules -> language level -> pilih yg java 15 preview
+
+variable hiding 			and method overriding
+not varibale overriding 	and method hiding
+
+penamaan class:
+harus ada nama class yg sama dengan nama file
+hanya boleh 1 public class
+
+final class -> tidak bisa diturunkan, karena sudah final
+final method -> tidak bisa di override, karena sudah final
+
+
+
+
+
+
+
+
+inheritance -> turunan/warisan
+	Ordinary/sub 	-> child class/derived class
+	super 			-> parent class/super class
+
+polymorphisme 	-> object bisa jalan-jalan ke class ordinary atau class super(dinamis)
+				-> invoke an ordinary class through a super class
+
+cast (konversi tipe data) -> tipe data bukan primmitif
+
+abstract class		->	super class		abstract class
+						subclass		abstract class	ga error
+
+						super class		public class
+						subclass		abstract class	error
+
+						super class		abstract class
+						subclass		public class	ga error
+
+class abstract hanya bisa diturunkan, tidak bbisa dibuat
+
+abstract method -> ga boleh implementasi/block method {}
+saat abstract method dibuat di superclass, maka
+semua turunannya wajib membuat abstract method tersebut
+
+
+encapsulation -> getter setter di private
+
+tipe data		getter method 		setter method
+
+boolean			isXxx				setXxx(boolean value)
+primitif 		getXxx				setXxx(primitif value)
+Object 			getXxx				setXxx(object value)
+
+code -> generate -> getter and setter -> pilih semuanya -> ok
+
+gunanya ialah untuk validasi, filtrasi, dsb
+kalau null ga diterima
+
+
+
+
+
+
+
+
+
+
+
+
+
+idealnya menggunakan interface:
+interface -> semua method abstract
+
+ctrl + spasi
+polymorphism -> Car car = new Avanza();
+implements
+default method -> kaya default di select case
+
+
+inheritance:
+
+HasBrand
+	|
+   car 		IsMaintenance
+    |			 |
+  Avanza ---------		
+	|
+  CarApp
+
+
+HasBrand	IsMaintenance
+	|			|
+   car 	---------	
+    |			 
+  Avanza 	
+	|
+  CarApp
+
+
+
+inner class -> 
+anonymous class ->
+inner class + anonymous class + interface = nice u/ kasus yg sederhana
+
+
+
+
+
+
+
+
+record class -> pendefinisian kaya method
+constructor(method) di record class -> kaya class
+method di record class
+
+getter, equals, hashcode, tostring, constructor secara otomatis meskipun ga keliatan
+
+
+record class -> ga bisa extends
+				bisa implements
+immutable -> gabisa dirubah lagi (final)
+
+
+
+
+
+
+
+
+// baca lagi, karena kurang mengertival
+
+enum class
+
+bisa bikin field, constructor, method di enum class
+
+enum class
+	|
+	|
+class biasa
+	|
+	|
+psvm/XxxApp
+
+
+
+
+
+
+// baca lagi
+ctrl + click di throwable-> buat ngeliat
+
+exception
+1. bikin exception class 		dengan extends "throwable"
+2. bikin exception 				dengan setelah nama method "throws" dan dengan "throw new" pada kondisi if di method
+3. pemanggilan exception 		dengan try-catch
+
+try membaca file
+catch menangkap jika ada error
+finally error/ga error tetep muncul, gunanya agar tidak menggantung di memory
+
+checked -> wajib use throws
+runtime -> tidak wajib (boleh kosong, boleh diisi)
+
+runtime
+1. bikin exception class 		dengan extends "runtime"
+2. bikin exception 				ga perlu "throws" tapi dengan "throw new" pada kondisi if di method
+3. pemanggilan exception 		dengan try-catch
+
+ERROR
+
+1. bikin error class			dengan extends "Error"
+2. bikin exception 				ga perlu "throws" tapi dengan "throw new" pada kondisi if di method
+3. pemanggilan exception 		tidak dengan try-catch, tapi 
+
+StackTrace -> memberitahu error sampai ke baris ke berapa
+
+
+
+
+
+
+//baca lagi
+annotation -> interface
+annotation -> method dengan tipe data sederhana, dan bisa memiliki default
+
+@Target memberitahu annotation bisa digunakan dimana ? class, method, field, lain
+@Retention memberitahu apakah annotation disimpan di hasil kompilasinya, dan apakah bisa dibaca oleh reflection
+
+maksudnya targetnya itu : ngoper ke mana, apakah ke class lain, atau ke method lain
+
+@deprecated -> udah ga relevan
+@override -> ngasih tau kalo method tersebut meng override 
+
+
+reflection :
+
+
+
+
+
+
+
+
+
+override toString()
+
+override equals() -> code, generate, intellij default, next
+
+equals 
+v1 == v2
+1. stringnya sama 				2==3	true
+2. string di memorinya sama		1==2	false
+
+v1.equals(v2)
+1. stringnya sama 				v2.equals(v3)	true		pengecekan isi (string)
+2. string di memorinya sama		v1.equals(v2)	false		pengecekan pengisian (menggunakan object dengan memori apa)
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+setiap objek yg ada di class tersebut, bisa diakses dari luar package
+
+merupakan			class/subclass/method/object 			subclass/method/object				method/object 											method/object
+yg berada di 		luar package							luar class 							luar subclass											luar method tapi di subclass yg sama
+
+modifier 			world yg sama (luar package)			package yg sama (luar class)		class yg sama (luar subclass, di super/parent/base)		subclass yg sama (luar method)
+
+
+
+modifier			world									package								class													subclass
+
+public				y										y									y														y
+protected			n 										y									y 														y
+private 			n 										n 									y  														n
+
+no modifier			n 										y 									y 														n
+
+
+no modifier khusus buat newbie
+
+
+method
+modifier 			world	package		class	subclass
+
+public				y		y			y		y
+protected			n 		y			y 		y
+private 			n 		n 			y  		n
+no modifier			n 		y 			y 		n
+
+
+
+constructor
+modifier 			world	package		class	subclass
+
+public				y		y			y		y
+protected			n 		y			y 		y
+private 			n 		n 			y  		n
+no modifier			n 		y 			y 		n
+
+
+
+
+
+
+static field, static class, static method, static block
+static hanya bisa mengakses yg static juga
+buat helper - helper, buat constant, pakenya static
+
+sebelumnya (ga pake static) method ga bisa diakses tanpa menyebutkan objectnya
+setelahnya (pake static) method bisa diakses tanpa menyebutkan objectnya
+
+pemanggilan 1: 
+import static programmer.zaman.now.data.Constant.APPLICATION;
+atau
+import static programmer.zaman.now.data.Application.*;
+
+        System.out.println(APPLICATION);
+
+pemanggilan 2:
+	import programmer.zaman.now.data.Application;
+
+        System.out.println(Constant.APPLICATION);
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+using java library
+
+
+interface 1		method 1
+				method 2
+
+interface 2		method 1
+				method 2
+
+class 1			field		
+				consturctor 1
+				constructor 2
+				constructor 3
+				main method 		object 1
+									object 2
+									object 3
+									object 4
+				method 1
+				method 2
+				method 3
+
+
+
+class 2			field		
+				consturctor 1
+				constructor 2
+				main method 		object 1
+									object 2
+									object 3
+									object 4
+				method 1
+				method 2
+				method 3
+
+
+interface 1		method 1
+				method 2
+
+interface 2		method 1
+				method 2
+
+class 3			field		
+				consturctor 1
+				constructor 2
+				constructor 3
+				constructor 4
+				main method 		object 1
+									object 2
+									object 3
+									object 4
+				method 1
+				method 2
+				method 3
+
+
+
+
+class n 		field
+				main method 		object 1
+									object 2
+									object 3
+									object 4
+				method 1
+				method 2
+				method 3
+
+
+
+
+
+
+
+
+
+
